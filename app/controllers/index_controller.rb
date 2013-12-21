@@ -38,7 +38,7 @@ class IndexController < ApplicationController
     data = {id: end_time, asked: asked, unanswered: unans, percentage: perc}
 
     @coll.save(data)
-    render json: {response: 200}
+    # render json: {response: 200}
 
   end
 
