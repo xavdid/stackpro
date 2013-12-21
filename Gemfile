@@ -15,6 +15,8 @@ gem 'jquery-rails'
 
 gem 'haml'
 
+gem 'httparty'
+
 gem 'json'
 
 gem 'bson_ext'
