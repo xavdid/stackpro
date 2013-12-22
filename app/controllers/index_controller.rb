@@ -8,12 +8,10 @@ class IndexController < ApplicationController
     prev = 8
 
     #most recent PREV data points 
-
     @response = @coll.find({:id=>{'$gt'=>t.to_i-(3600*prev)}}).to_a
 
-    require 'pp'
-    pp @response
 
+    # this could probably be some sort of object is js wasn't so finnicky
     @dates = []
     @asked = []
     @unanswered = []
@@ -25,10 +23,6 @@ class IndexController < ApplicationController
       @unanswered.append(i["unanswered"])
       @percentage.append(i["percentage"])
     end
-
-    # puts @unanswered,'yo'
-
-
 
 
   end
