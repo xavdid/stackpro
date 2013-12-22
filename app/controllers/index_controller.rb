@@ -17,11 +17,13 @@ class IndexController < ApplicationController
     @dates = []
     @asked = []
     @unanswered = []
+    @percentage = []
 
     @response.each do |i|
       @dates.append(Time.at(i["id"]))
       @asked.append(i["asked"])
       @unanswered.append(i["unanswered"])
+      @percentage.append(i["percentage"])
     end
 
     # puts @unanswered,'yo'

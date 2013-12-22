@@ -1,6 +1,9 @@
 %h1
   hello!
 
+%h3
+  percect of questions unanswered
+
 %canvas{:id => "myChart", :width => 800, :height => 600}
 
 .butt
@@ -26,6 +29,8 @@ A work in progress by David
   var asked = makeClean("#{@asked}");
 
   var unanswered = makeClean("#{@unanswered}");
+
+  var percentage = makeClean("#{@percentage}");
 
   var ctx = document.getElementById("myChart").getContext("2d");
   var data = {
