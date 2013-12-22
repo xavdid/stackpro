@@ -1,15 +1,42 @@
 class IndexController < ApplicationController
   protect_from_forgery with: :null_session
-  include Mongo
   
   def home
-    @answer = 'got it from ruby'
+    read_db
+    t = Time.now
+    #this should get the past 24 hours worth of points, maybe displaying 4 at a time by default?
+    prev = 8
+
+    #most recent PREV data points 
+
+    @response = @coll.find({:id=>{'$gt'=>t.to_i-(3600*prev)}}).to_a
+
+    require 'pp'
+    pp @response
+
+    @dates = []
+    @asked = []
+    @unanswered = []
+
+    @response.each do |i|
+      @dates.append(Time.at(i["id"]))
+      @asked.append(i["asked"])
+      @unanswered.append(i["unanswered"])
+    end
+
+    # puts @unanswered,'yo'
+
+
+
+
   end
 
   def read_db
-    @client ||= MongoClient.from_uri('mongodb://d:b@ds053428.mongolab.com:53428/kinect')
+    @client ||= Mongo::MongoClient.from_uri('mongodb://d:b@ds053428.mongolab.com:53428/kinect')
     @db ||= @client.db('kinect')
     @coll ||= @db['data_points']
+
+    
   end
 
   # data points
@@ -17,5 +44,4 @@ class IndexController < ApplicationController
   # asked: total asked
   # unanswered: total unanswered
   # percentage: a/u * 100
-
 end

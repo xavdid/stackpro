@@ -1,7 +1,7 @@
 %h1
   hello!
 
-%canvas{:id => "myChart", :width => 400, :height => 400}
+%canvas{:id => "myChart", :width => 800, :height => 600}
 
 .butt
 
@@ -11,22 +11,39 @@ A work in progress by David
 
 :javascript
   function build(d){
-    new Chart(ctx).Bar(d,{});
+    new Chart(ctx).Line(d,{});
+  };
+
+  function makeClean(a){
+    var s = a.slice(1,a.length-1).split(', ');
+    for(var i=0; i<s.length;i++) s[i] = +s[i];
+    return s;
   }
+
+  var dates = "#{@dates}";
+  dates = dates.slice(1,dates.length-1).split(', ');
+
+  var asked = makeClean("#{@asked}");
+
+  var unanswered = makeClean("#{@unanswered}");
 
   var ctx = document.getElementById("myChart").getContext("2d");
   var data = {
-    labels : ["January","February","March","April","May","June","July"],
+    labels : dates,
     datasets : [
       {
         fillColor : "rgba(220,220,220,0.5)",
         strokeColor : "rgba(220,220,220,1)",
-        data : [65,59,90,81,56,55,40]
+        pointColor : "rgba(220,220,220,1)",
+        pointStrokeColor : "#fff",
+        data : asked
       },
       {
         fillColor : "rgba(151,187,205,0.5)",
         strokeColor : "rgba(151,187,205,1)",
-        data : [28,48,40,19,96,27,100]
+        pointColor : "rgba(151,187,205,1)",
+        pointStrokeColor : "#fff",
+        data : unanswered
       }
     ]
   }
@@ -38,6 +55,6 @@ A work in progress by David
   //runtime. idk.
 
   $(".butt").click(function(){
-    data.labels[0] = "#{@answer}";
+    // data.labels[0] = "#{@answer}";
     build(data);
   });
