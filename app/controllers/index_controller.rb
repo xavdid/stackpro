@@ -5,7 +5,7 @@ class IndexController < ApplicationController
     read_db
     t = Time.now
     #this should get the past 24 hours worth of points, maybe displaying 4 at a time by default?
-    prev = 8
+    prev = 24
 
     #most recent PREV data points 
     @response = @coll.find({:id=>{'$gt'=>t.to_i-(3600*prev)}}).to_a
