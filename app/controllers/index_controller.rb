@@ -18,7 +18,10 @@ class IndexController < ApplicationController
     @percentage = []
 
     @response.each do |i|
-      @dates.append(Time.at(i["id"]))
+      s = Time.at(i["id"]).to_s.split
+      s.pop
+      s = s.join(' ')
+      @dates.push(s)
       @asked.append(i["asked"])
       @unanswered.append(i["unanswered"])
       @percentage.append(i["percentage"])

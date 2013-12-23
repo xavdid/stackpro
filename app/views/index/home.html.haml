@@ -16,24 +16,19 @@ A work in progress by David
   function build(d){
     var m = Math.max.apply(Math, data.datasets[0].data)+50
 
-    new Chart(ctx).Line(d,{scaleOverride : true, scaleSteps : 10, scaleStepWidth : m/10, scaleStartValue : 0,});
+    new Chart(ctx).Line(d,{scaleOverride : true, scaleSteps : 10, scaleStepWidth : m/10, scaleStartValue : 0});
   };
 
-  function makeClean(a){
-    var s = a.slice(1,a.length-1).split(', ');
-    for(var i=0; i<s.length;i++) s[i] = +s[i];
-    return s;
-  }
+  var dates = #{@dates};
 
-  var dates = "#{@dates}";
-  dates = dates.slice(1,dates.length-1).split(', ');
+  var asked = #{@asked};
 
-  var asked = makeClean("#{@asked}");
+  var unanswered = #{@unanswered};
 
-  var unanswered = makeClean("#{@unanswered}");
+  var percentage = #{@percentage};
 
-  var percentage = makeClean("#{@percentage}");
   var averages = [];
+
   for (var i=3; i<percentage.length; i+=4){
     var a = percentage[i-3] + percentage[i-2] + percentage[i-1] + percentage[i];
     averages.push(a/4);
