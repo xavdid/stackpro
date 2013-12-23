@@ -2,7 +2,7 @@
   hello!
 
 %h3
-  percect of questions unanswered
+  asked answered Eastern time
 
 %canvas{:id => "myChart", :width => 1200, :height => 600}
 
@@ -26,13 +26,6 @@ A work in progress by David
   var unanswered = #{@unanswered};
 
   var percentage = #{@percentage};
-
-  var averages = [];
-
-  for (var i=3; i<percentage.length; i+=4){
-    var a = percentage[i-3] + percentage[i-2] + percentage[i-1] + percentage[i];
-    averages.push(a/4);
-  }
 
   var ctx = document.getElementById("myChart").getContext("2d");
   ctx.canvas.width  = window.innerWidth;

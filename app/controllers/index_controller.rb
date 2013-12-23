@@ -18,10 +18,7 @@ class IndexController < ApplicationController
     @percentage = []
 
     @response.each do |i|
-      s = Time.at(i["id"]).to_s.split
-      s.pop
-      s = s.join(' ')
-      @dates.push(s)
+      @dates.push(doctor(Time.at(i["id"]).to_s))
       @asked.append(i["asked"])
       @unanswered.append(i["unanswered"])
       @percentage.append(i["percentage"])
@@ -34,8 +31,26 @@ class IndexController < ApplicationController
     @client ||= Mongo::MongoClient.from_uri('mongodb://d:b@ds053428.mongolab.com:53428/kinect')
     @db ||= @client.db('kinect')
     @coll ||= @db['data_points']
+  end
 
-    
+  # to repair time!
+
+  def doctor(t)
+    a = t.split
+    a.pop
+    a = a.reverse
+    # removing seconds from time
+    ti = a[0].split(":")
+    ti.pop
+    a[0] = ti.join(":")
+    # removing year from date
+    da = a[1]
+    da = da.split('-').rotate
+    da.pop
+    a[1] = da.join('/')
+    a = a.join(' ')
+    return a
+
   end
 
   # data points
