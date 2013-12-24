@@ -15,22 +15,20 @@
     .box#subset
 
 %canvas{:id => "myChart", :width => 1200, :height => 600}
-
+/ need to iterate through and add the correct numer of rows, then probably linear 5x to fill each column (to save having to actually reorganize data
 %table#thechart
-  %tr
-    %td
-      time
-    %td
-      thing
-    %td
-      unix
-  %tr
-    %td
-      1
-    %td
-      2
-    %td
-      3
+  %thead
+    %tr
+      %td
+        Timestamp
+      %td
+        Percent Unanswered
+      %td
+        Questions Asked
+      %td
+        Questions Answered
+  %tbody
+    
 
 
 .footer
@@ -81,11 +79,25 @@
     ]
   }
 
-  build(data);
+  build(data); //builds the chart
 
   //all of the ruby stuff is included at load. might get too big, might not.
   //the web is scary, can probably have huge data included? may hurt
   //runtime. idk.
+  for (var i=0; i<dates.length;i++) {
+    var r = ["<tr>",
+      "<td>",dates[i],"</td>",
+      "<td>",percentage[i].toFixed(2)+'%',"</td>",
+      "<td>",asked[i],"</td>",
+      "<td>",unanswered[i],"</td>",
+      "</tr>"].join(' ');
+
+    $("#thechart").append(r);
+  };
+
+  
+
+
 
   $(".butt").click(function(){
     // data.labels[0] = "#{@answer}";
