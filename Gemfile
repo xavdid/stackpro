@@ -24,3 +24,5 @@ gem 'bson_ext'
 gem "mongoid"
 
 gem 'bson'
+
+gem 'rails_12factor'
