@@ -8,7 +8,7 @@ class IndexController < ApplicationController
     prev = 8
 
     #most recent PREV data points 
-    @response = @coll.find({:id=>{'$gt'=>t.to_i-(3600*prev)}}).to_a
+    @response = @coll.find({:unix=>{'$gt'=>t.to_i-(3600*prev)}}).to_a
 
     # make this callable, or just always pass front the max and slice what js shows?
     # this could probably be some sort of object is js wasn't so finnicky
@@ -21,11 +21,11 @@ class IndexController < ApplicationController
     # don't need this, passing objects (pull out bson, probs)
     # I actually should, the more intense processing should be server side
     @response.each do |i|
-      @dates.push(doctor(Time.at(i["id"]).to_s))
+      @dates.push(i["timestamp"])
       @asked.append(i["asked"])
       @unanswered.append(i["unanswered"])
       @percentage.append(i["percentage"])
-      @responses.push(i.to_json)
+      # @responses.push(i.to_json)
     end
 
 

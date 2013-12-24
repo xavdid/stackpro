@@ -23,8 +23,8 @@ A work in progress by David
 :javascript
   function build(d){
     // chart should scale to fit the whole graph
-    var m = Math.max.apply(Math, data.datasets[0].data)+50
-    var n = Math.min.apply(Math, data.datasets[1].data)-50
+    var m = Math.max.apply(Math, data.datasets[0].data)+50;
+    var n = Math.min.apply(Math, data.datasets[1].data)-50;
 
     new Chart(ctx).Line(d,{scaleOverride : true, scaleSteps : 10, scaleStepWidth : m/10, scaleStartValue : n});
   };
@@ -37,7 +37,7 @@ A work in progress by David
 
   var percentage = #{@percentage};
 
-  var r = #{@responses};
+  // var r = #{@responses};
 
   //JSON.parse(r[0]);
 
