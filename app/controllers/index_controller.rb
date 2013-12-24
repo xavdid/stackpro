@@ -5,23 +5,27 @@ class IndexController < ApplicationController
     read_db
     t = Time.now
     #this should get the past 24 hours worth of points, maybe displaying 4 at a time by default?
-    prev = 24
+    prev = 8
 
     #most recent PREV data points 
     @response = @coll.find({:id=>{'$gt'=>t.to_i-(3600*prev)}}).to_a
 
-
+    # make this callable, or just always pass front the max and slice what js shows?
     # this could probably be some sort of object is js wasn't so finnicky
     @dates = []
     @asked = []
     @unanswered = []
     @percentage = []
 
+    @responses = []
+    # don't need this, passing objects (pull out bson, probs)
+    # I actually should, the more intense processing should be server side
     @response.each do |i|
       @dates.push(doctor(Time.at(i["id"]).to_s))
       @asked.append(i["asked"])
       @unanswered.append(i["unanswered"])
       @percentage.append(i["percentage"])
+      @responses.push(i.to_json)
     end
 
 
@@ -34,7 +38,7 @@ class IndexController < ApplicationController
   end
 
   # to repair time!
-
+  # don't need this, it's done in rake
   def doctor(t)
     a = t.split
     a.pop

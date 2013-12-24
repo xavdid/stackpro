@@ -8,11 +8,11 @@
   %li
     Questions Asked:
   %li
-    .box#asked
+    .box#total
   %li
     Questions Unanswered:
   %li
-    .box#unanswered
+    .box#subset
 
 %canvas{:id => "myChart", :width => 1200, :height => 600}
 
@@ -22,9 +22,11 @@ A work in progress by David
 
 :javascript
   function build(d){
+    // chart should scale to fit the whole graph
     var m = Math.max.apply(Math, data.datasets[0].data)+50
+    var n = Math.min.apply(Math, data.datasets[1].data)-50
 
-    new Chart(ctx).Line(d,{scaleOverride : true, scaleSteps : 10, scaleStepWidth : m/10, scaleStartValue : 0});
+    new Chart(ctx).Line(d,{scaleOverride : true, scaleSteps : 10, scaleStepWidth : m/10, scaleStartValue : n});
   };
 
   var dates = #{@dates};
@@ -35,6 +37,10 @@ A work in progress by David
 
   var percentage = #{@percentage};
 
+  var r = #{@responses};
+
+  //JSON.parse(r[0]);
+
   var ctx = document.getElementById("myChart").getContext("2d");
   ctx.canvas.width  = window.innerWidth;
   var data = {
@@ -42,14 +48,14 @@ A work in progress by David
     datasets : [
       {
         fillColor : "#1145ff",
-        strokeColor : "rgba(220,220,220,1)",
+        strokeColor : "#000000",
         pointColor : "#fff",
         pointStrokeColor : "#000000",
         data : asked
       },
       {
         fillColor : "rgba(151,187,205,0.5)",
-        strokeColor : "rgba(151,187,205,1)",
+        strokeColor : "rgba(151,187,205,0.8)",
         pointColor : "#fff",
         pointStrokeColor : "#000000",
         data : unanswered

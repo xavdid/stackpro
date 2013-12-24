@@ -8,6 +8,8 @@ task :query_so => :environment do
 
   t = Time.now
 
+  data = {}
+
   start_time = t.to_i - 3599
   end_time = t.to_i
 
@@ -15,18 +17,34 @@ task :query_so => :environment do
 
   r = JSON.parse(r.body)
 
-  asked = r["total"].to_f
+  data[:asked] = r["total"].to_f
 
   r = HTTParty.get("https://api.stackexchange.com/2.1/questions/unanswered?pagesize=1&fromdate=#{start_time}&todate=#{end_time}&site=stackoverflow&filter=!3ugOCpzcfBz9QEr8Ve.I")
 
   r = JSON.parse(r.body)
 
-  unans = r["total"].to_f
+  data[:unanswered] = r["total"].to_f
 
-  perc = unans / asked * 100
+  data[:percentage] = data[:unanswered] / data[:asked] * 100
 
-  data = {id: end_time, asked: asked, unanswered: unans, percentage: perc}
+  data[:unix] = end_time
+
+  a = t.to_s.split
+  a.pop
+  a = a.reverse
+  # removing seconds from time
+  ti = a[0].split(":")
+  ti.pop
+  a[0] = ti.join(":")
+  # removing year from date
+  da = a[1]
+  da = da.split('-').rotate
+  da.pop
+  a[1] = da.join('/')
+  a = a.join(' ')
+
+  data[:timestamp] = a
 
   @coll.save(data)
-  puts 'boom',t
+  puts 'boom',t,data
 end
