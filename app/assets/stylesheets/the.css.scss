@@ -3,13 +3,32 @@
     
 }
 
+// body {
+//     background-color: #bdbdbd;
+// }
+
 h1 {
-    color: purple;
+    // color: purple;
 }
 
-.butt {
-    height: 100px; 
-    width: 100px;
+.box {
+    height: 20px; 
+    width: 20px;
     background-color: #000;
-    margin: 50px;
+    // margin: 5px;
+    clear: both;
+    outline: 1px solid black;
+    margin-right: 50px;
+}
+
+#asked {
+    background-color: #1145ff;
+}
+
+#unanswered {
+    background-color: #97bbcd;
+}
+
+li {
+    display: inline-block;
 }
