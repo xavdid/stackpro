@@ -16,9 +16,27 @@
 
 %canvas{:id => "myChart", :width => 1200, :height => 600}
 
-A work in progress by David
-%a{href:"http://www.davidbrownman.com"}
-  Brownman
+%table#thechart
+  %tr
+    %td
+      time
+    %td
+      thing
+    %td
+      unix
+  %tr
+    %td
+      1
+    %td
+      2
+    %td
+      3
+
+
+.footer
+  A work in progress by David
+  %a{href:"http://www.davidbrownman.com"}
+    Brownman
 
 :javascript
   function build(d){
