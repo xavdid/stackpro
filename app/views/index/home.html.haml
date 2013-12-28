@@ -15,8 +15,8 @@
     .box#subset
 
 %canvas{:id => "myChart", :width => 1200, :height => 600}
-/ need to iterate through and add the correct numer of rows, then probably linear 5x to fill each column (to save having to actually reorganize data
-%table#thechart
+/ need to iterate through and add the correct numer of rows, then probably linear 5x to fill each column (to save having to actually reorganize data)
+%table#thechart.tablesorter
   %thead
     %tr
       %td
@@ -42,7 +42,15 @@
     var m = Math.max.apply(Math, data.datasets[0].data)+50;
     var n = Math.min.apply(Math, data.datasets[1].data)-50;
 
-    new Chart(ctx).Line(d,{scaleOverride : true, scaleSteps : 10, scaleStepWidth : m/10, scaleStartValue : n});
+    var options = {
+      scaleOverride : true, 
+      scaleSteps : 10, 
+      scaleStepWidth : m/10, 
+      scaleStartValue : n
+    };
+
+    new Chart(ctx).Line(d,options);
+
   };
 
   var dates = #{@dates};
@@ -58,7 +66,7 @@
   //JSON.parse(r[0]);
 
   var ctx = document.getElementById("myChart").getContext("2d");
-  ctx.canvas.width  = window.innerWidth;
+  ctx.canvas.width  = window.innerWidth-20;
   var data = {
     labels : dates,
     datasets : [
@@ -92,10 +100,10 @@
       "<td>",unanswered[i],"</td>",
       "</tr>"].join(' ');
 
-    $("#thechart").append(r);
+    $("#thechart tbody").append(r);
   };
 
-  
+  $(".tablesorter").tablesorter();
 
 
 

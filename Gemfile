@@ -26,3 +26,5 @@ gem "mongoid"
 gem 'bson'
 
 gem 'rails_12factor'
+
+gem 'jquery-tablesorter'
