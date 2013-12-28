@@ -15,7 +15,7 @@
     .box#subset
 
 %canvas{:id => "myChart", :width => 1200, :height => 600}
-/ need to iterate through and add the correct numer of rows, then probably linear 5x to fill each column (to save having to actually reorganize data)
+
 %table#thechart.tablesorter
   %thead
     %tr
@@ -39,7 +39,7 @@
     Brownman
 
 :javascript
-  function build(d){
+  function buildGraph(d){
     // chart should scale to fit the whole graph
     var m = Math.max.apply(Math, data.datasets[0].data)+50;
     var n = Math.min.apply(Math, data.datasets[1].data)-50;
@@ -89,11 +89,13 @@
     ]
   }
 
-  build(data); //builds the chart
+  buildGraph(data); //builds the chart
 
   //all of the ruby stuff is included at load. might get too big, might not.
   //the web is scary, can probably have huge data included? may hurt
   //runtime. idk.
+
+  //table tbody.emtpy to empty rows, then can just loop again
   for (var i=0; i<dates.length;i++) {
     var r = ["<tr>",
       "<td>",i,"</td>",
@@ -112,5 +114,5 @@
 
   $(".butt").click(function(){
     // data.labels[0] = "#{@answer}";
-    build(data);
+    buildGraph(data);
   });

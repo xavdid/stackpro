@@ -13,7 +13,6 @@ class IndexController < ApplicationController
     @response = @coll.find({:unix=>{'$gt'=>t.to_i-(3600*prev)}}).to_a
 
     # make this callable, or just always pass front the max and slice what js shows?
-    # this could probably be some sort of object is js wasn't so finnicky
     @dates = []
     @asked = []
     @unanswered = []
