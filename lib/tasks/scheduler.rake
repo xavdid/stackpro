@@ -48,3 +48,25 @@ task :query_so => :environment do
   @coll.save(data)
   puts 'boom',t,data
 end
+
+
+desc "Clears data over a certain age"
+task :clear_old => :environment do
+  puts 'querying'
+  @client ||= Mongo::MongoClient.from_uri('mongodb://d:b@ds053428.mongolab.com:53428/kinect')
+  @db ||= @client.db('kinect')
+  @coll ||= @db['data_points']
+
+  t = Time.now
+
+  # number of hours to keep
+  prev = 72
+
+  threshold = t.to_i - (3600 * prev)
+
+  @coll.remove({'unix' => {'$lt' => threshold}})
+
+
+  puts 'Removed everything before',Time.at(threshold),'at',t
+
+end
