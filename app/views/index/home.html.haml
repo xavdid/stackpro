@@ -14,7 +14,7 @@
   %li
     .box#subset
 
-%canvas{:id => "myChart", :width => 1200, :height => 600}
+%canvas{:id => "theChart", :width => 1200, :height => 600}
 
 %table#thechart.tablesorter
   %thead
@@ -24,7 +24,7 @@
       %td
         Timestamp
       %td
-        Percent Unanswered
+        Average Percent Unanswered
       %td
         Questions Asked
       %td
@@ -39,10 +39,31 @@
     Brownman
 
 :javascript
-  function buildGraph(d){
+  // takes three lists (dates, asked, answered) to build the graph
+  function buildChart(d){
     // chart should scale to fit the whole graph
     var m = Math.max.apply(Math, data.datasets[0].data)+50;
     var n = Math.min.apply(Math, data.datasets[1].data)-50;
+
+    var data = {
+      labels : dates,
+      datasets : [
+        {
+          fillColor : "#1145ff",
+          strokeColor : "#000000",
+          pointColor : "#fff",
+          pointStrokeColor : "#000000",
+          data : asked
+        },
+        {
+          fillColor : "rgba(151,187,205,0.5)",
+          strokeColor : "rgba(151,187,205,0.8)",
+          pointColor : "#fff",
+          pointStrokeColor : "#000000",
+          data : unanswered
+        }
+      ]
+    }
 
     var options = {
       scaleOverride : true, 
@@ -51,10 +72,68 @@
       scaleStartValue : n
     };
 
-    new Chart(ctx).Line(d,options);
+    new Chart(ctx).Line(data,options);
 
   };
 
+  // will build the chart
+  function buildTable(){
+    var table = $("#theTable tbody");
+    for (var i=0; i<dates.length;i++) {
+      var r = ["<tr>",
+        "<td>",i*interval,"</td>",
+        "<td>",dates[i],"</td>",
+        "<td>",percentage[i].toFixed(2)+'%',"</td>",
+        "<td>",asked[i],"</td>",
+        "<td>",unanswered[i],"</td>",
+        "</tr>"].join(' ');
+
+      table.append(r);
+    };
+
+    $("#theTable").tablesorter();
+
+  };
+
+  // sets passes interval data and builds accordingly
+  function build(interval){
+    if (interval == 1) {
+      //just slice and pass
+    }
+    // 0 1 2 3 4 5 
+    else {
+      var tempTotal = 0;
+      for (var i=interval-1; i<dates.length; i+=interval) {
+        
+        slicedDates.push(dates[i]);
+
+        tempTotal = 0;
+        for (var j=0; j<interval; j++) {
+          tempTotal += asked[i-j];
+        }
+        slicedAsked.push(tempTotal);
+
+        tempTotal = 0;
+        for (var j=0; j<interval; j++) {
+          tempTotal += answered[i-j];
+        }
+        slicedUnanswered.push(tempTotal);
+
+        tempTotal = 0;
+        for (var j=0; j<interval; j++) {
+          tempTotal += percentage[i-j];
+        }
+        slicedPercentage.push(tempTotal/interval);
+
+      };
+      
+      buildChart(slicedDates, slicedAsked, slicedUnanswered);
+      buildTable(interval, slicedDates, slicedAsked, slicedUnanswered, slicedPercentage);
+    }
+
+  };
+
+  // import data from rails
   var dates = #{@dates};
 
   var asked = #{@asked};
@@ -63,56 +142,59 @@
 
   var percentage = #{@percentage};
 
-  // var r = #{@responses};
+  // intervals: 
+  //    every 1 for 24 => 24
+  //    every 2 for 48 => 24
+  //    every 3 for 48 => 16
+  //    every 4 for 48 => 12
 
-  //JSON.parse(r[0]);
 
-  var ctx = document.getElementById("myChart").getContext("2d");
+  var ctx = document.getElementById("theChart").getContext("2d");
   ctx.canvas.width  = window.innerWidth-20;
-  var data = {
-    labels : dates,
-    datasets : [
-      {
-        fillColor : "#1145ff",
-        strokeColor : "#000000",
-        pointColor : "#fff",
-        pointStrokeColor : "#000000",
-        data : asked
-      },
-      {
-        fillColor : "rgba(151,187,205,0.5)",
-        strokeColor : "rgba(151,187,205,0.8)",
-        pointColor : "#fff",
-        pointStrokeColor : "#000000",
-        data : unanswered
-      }
-    ]
-  }
+  // var data = {
+  //   labels : dates,
+  //   datasets : [
+  //     {
+  //       fillColor : "#1145ff",
+  //       strokeColor : "#000000",
+  //       pointColor : "#fff",
+  //       pointStrokeColor : "#000000",
+  //       data : asked
+  //     },
+  //     {
+  //       fillColor : "rgba(151,187,205,0.5)",
+  //       strokeColor : "rgba(151,187,205,0.8)",
+  //       pointColor : "#fff",
+  //       pointStrokeColor : "#000000",
+  //       data : unanswered
+  //     }
+  //   ]
+  // }
 
-  buildGraph(data); //builds the chart
+  // buildChart(data); 
 
   //all of the ruby stuff is included at load. might get too big, might not.
   //the web is scary, can probably have huge data included? may hurt
   //runtime. idk.
 
   //table tbody.emtpy to empty rows, then can just loop again
-  for (var i=0; i<dates.length;i++) {
-    var r = ["<tr>",
-      "<td>",i,"</td>",
-      "<td>",dates[i],"</td>",
-      "<td>",percentage[i].toFixed(2)+'%',"</td>",
-      "<td>",asked[i],"</td>",
-      "<td>",unanswered[i],"</td>",
-      "</tr>"].join(' ');
+  // for (var i=0; i<dates.length;i++) {
+  //   var r = ["<tr>",
+  //     "<td>",i,"</td>",
+  //     "<td>",dates[i],"</td>",
+  //     "<td>",percentage[i].toFixed(2)+'%',"</td>",
+  //     "<td>",asked[i],"</td>",
+  //     "<td>",unanswered[i],"</td>",
+  //     "</tr>"].join(' ');
 
-    $("#thechart tbody").append(r);
-  };
+  //   $("#theTable tbody").append(r);
+  // };
 
-  $(".tablesorter").tablesorter();
+  // $("#theTable").tablesorter();
 
 
 
   $(".butt").click(function(){
     // data.labels[0] = "#{@answer}";
-    buildGraph(data);
+    buildChart(data);
   });
