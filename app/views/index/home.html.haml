@@ -20,6 +20,8 @@
   %thead
     %tr
       %td
+        Hours Ago
+      %td
         Timestamp
       %td
         Percent Unanswered
@@ -94,6 +96,7 @@
   //runtime. idk.
   for (var i=0; i<dates.length;i++) {
     var r = ["<tr>",
+      "<td>",i,"</td>",
       "<td>",dates[i],"</td>",
       "<td>",percentage[i].toFixed(2)+'%',"</td>",
       "<td>",asked[i],"</td>",
