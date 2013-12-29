@@ -80,7 +80,8 @@
   // will build the chart
   function buildTable(interval, dates, asked, unanswered, percentage){
     console.log("in buildTable");
-    // var table = $("#theTable tbody");
+    var table = $("#theTable tbody");
+    table.empty();
     for (var i=0; i<dates.length;i++) {
       var r = ["<tr>",
         "<td>",i*interval,"</td>",
@@ -90,9 +91,9 @@
         "<td>",unanswered[i],"</td>",
         "</tr>"].join(' ');
 
-      $("#theTable tbody").append(r);
+      table.append(r);
     };
-    console.log("finished loop");
+    // console.log("finished loop");
     $("#theTable").tablesorter();
 
   };
@@ -103,12 +104,12 @@
     if (interval === 1) {
       console.log("int is one");
       //just slice and pass
-      var slicedDates = dates.slice(0,24);
-      var slicedAsked = asked.slice(0,24);
-      var slicedUnanswered = unanswered.slice(0,24);
-      var slicedPercentage = percentage.slice(0,24);
+      var slicedDates = dates.slice(dates.length - 24, dates.length);
+      var slicedAsked = asked.slice(dates.length - 24, dates.length);
+      var slicedUnanswered = unanswered.slice(dates.length - 24, dates.length);
+      var slicedPercentage = percentage.slice(dates.length - 24, dates.length);
     }
-    // 0 1 2 3 4 5 
+
     else {
       console.log("else");
       var tempTotal = 0;
@@ -129,7 +130,7 @@
 
         tempTotal = 0;
         for (var j=0; j<interval; j++) {
-          tempTotal += answered[i-j];
+          tempTotal += unanswered[i-j];
         }
         slicedUnanswered.push(tempTotal);
 

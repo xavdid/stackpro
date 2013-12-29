@@ -5,7 +5,7 @@ class IndexController < ApplicationController
     read_db
     t = Time.now
     #this should get the past 24 hours worth of points, maybe displaying 4 at a time by default?
-    prev = 24
+    prev = 48
 
     # most recent PREV data points 
     # shouldn't need to sort, data will always be in order it went int
