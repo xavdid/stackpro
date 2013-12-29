@@ -16,7 +16,7 @@
 
 %canvas{:id => "theChart", :width => 1200, :height => 600}
 
-%table#thechart.tablesorter
+%table#theTable
   %thead
     %tr
       %td
@@ -40,10 +40,11 @@
 
 :javascript
   // takes three lists (dates, asked, answered) to build the graph
-  function buildChart(d){
+  function buildChart(dates, asked, unanswered){
+    console.log("in buildChart");
     // chart should scale to fit the whole graph
-    var m = Math.max.apply(Math, data.datasets[0].data)+50;
-    var n = Math.min.apply(Math, data.datasets[1].data)-50;
+    var m = Math.max.apply(Math, asked)+50;
+    var n = Math.min.apply(Math, unanswered)-50;
 
     var data = {
       labels : dates,
@@ -77,8 +78,9 @@
   };
 
   // will build the chart
-  function buildTable(){
-    var table = $("#theTable tbody");
+  function buildTable(interval, dates, asked, unanswered, percentage){
+    console.log("in buildTable");
+    // var table = $("#theTable tbody");
     for (var i=0; i<dates.length;i++) {
       var r = ["<tr>",
         "<td>",i*interval,"</td>",
@@ -88,21 +90,33 @@
         "<td>",unanswered[i],"</td>",
         "</tr>"].join(' ');
 
-      table.append(r);
+      $("#theTable tbody").append(r);
     };
-
+    console.log("finished loop");
     $("#theTable").tablesorter();
 
   };
 
   // sets passes interval data and builds accordingly
   function build(interval){
-    if (interval == 1) {
+    console.log("in build");
+    if (interval === 1) {
+      console.log("int is one");
       //just slice and pass
+      var slicedDates = dates.slice(0,24);
+      var slicedAsked = asked.slice(0,24);
+      var slicedUnanswered = unanswered.slice(0,24);
+      var slicedPercentage = percentage.slice(0,24);
     }
     // 0 1 2 3 4 5 
     else {
+      console.log("else");
       var tempTotal = 0;
+      var slicedDates = [];
+      var slicedAsked = [];
+      var slicedUnanswered = [];
+      var slicedPercentage = [];
+
       for (var i=interval-1; i<dates.length; i+=interval) {
         
         slicedDates.push(dates[i]);
@@ -126,10 +140,10 @@
         slicedPercentage.push(tempTotal/interval);
 
       };
-      
-      buildChart(slicedDates, slicedAsked, slicedUnanswered);
-      buildTable(interval, slicedDates, slicedAsked, slicedUnanswered, slicedPercentage);
     }
+
+    buildChart(slicedDates, slicedAsked, slicedUnanswered);
+    buildTable(interval, slicedDates, slicedAsked, slicedUnanswered, slicedPercentage);
 
   };
 
@@ -151,6 +165,10 @@
 
   var ctx = document.getElementById("theChart").getContext("2d");
   ctx.canvas.width  = window.innerWidth-20;
+
+  var interval = 1;
+
+  build(interval);
   // var data = {
   //   labels : dates,
   //   datasets : [
