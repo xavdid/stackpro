@@ -18,4 +18,6 @@ Once an hour, a rake process runs to collect data from the [Stack Overflow API](
         "timestamp": [string] a nicely formatted string: "hh:mm mm/dd"
     }
 
-When the site is loaded, rails calls the database for the most recent 48 entries and makes an array for each of the fields. Because the chart takes arrays, it's easier to do this iteration server side. On the front, [chart.js](http://www.chartjs.org) and [tablesorter](http://tablesorter.com/docs/) provide beautiful representations of the data. The interval buttons slice and average the data live as necessary. The whole thing is hosted on [Heroku](http://www.heroku.com).
+When the site is loaded, rails calls the database for the most recent 48 entries and makes an array for each of the fields. Because the chart takes arrays, it's easier to do this iteration server side. On the front, [chart.js](http://www.chartjs.org) and [tablesorter](http://tablesorter.com/docs/) provide beautiful representations of the data. The interval buttons slice and average the data live as necessary. 
+
+The whole thing is hosted on [Heroku](http://www.heroku.com). Every 24 hours, all data older than 72 hours is erased to keep db size low (72 hours are kept just in case I expand at some point in the future).
