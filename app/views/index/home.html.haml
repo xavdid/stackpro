@@ -115,8 +115,7 @@
     if (interval === 1) {var hours = 23}
     else {var hours = 47};
 
-    var table = $("#theTable tbody");
-    table.empty();
+    $("#theTable tbody").empty();
     for (var i=0; i<dates.length;i++) {
       var r = ["<tr>",
         "<td>",hours - i*interval,"</td>",
@@ -126,9 +125,10 @@
         "<td>",unanswered[i],"</td>",
         "</tr>"].join(' ');
 
-      table.append(r);
+      $("#theTable tbody").append(r);
     };
     $("#theTable").tablesorter();
+    $("#theTable").trigger("update");
 
   };
 
