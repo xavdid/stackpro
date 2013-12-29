@@ -1,4 +1,4 @@
-# Stackpro
+# StackPro
 
 ## The Assignment
 As dictated by the [Hackerati](http://www.thehackerati.com):
