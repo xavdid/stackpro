@@ -35,9 +35,6 @@ class IndexController < ApplicationController
     @coll ||= @db['data_points']
   end
 
-  # data points
-  # id: unix timestamp for end of the hour
-  # asked: total asked
-  # unanswered: total unanswered
-  # percentage: a/u * 100
+  def about
+  end  
 end

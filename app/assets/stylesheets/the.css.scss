@@ -10,6 +10,10 @@ a:hover {
     text-decoration: underline;
 }
 
+a:visited {
+    color: blue;
+}
+
 h1 {
     font-size: 3em;
     font-weight: normal;
@@ -18,11 +22,13 @@ h1 {
 
 h2 {
     font-weight: normal;
-    padding-left: 30px;
+    padding-left: 40px;
 }
 
-a:visited {
-    color: blue;
+p {
+    margin-left: 50px;
+    width: 70%;
+    font-weight: 200;
 }
 
 .box {
@@ -44,10 +50,7 @@ a:visited {
 
 li {
     display: inline-block;
-}
-
-.first {
-    padding-left: 10px;
+    font-weight: 200;
 }
 
 .interval {
@@ -60,6 +63,11 @@ li {
 .interval:hover {
     color: blue;
     cursor: default;
+}
+
+// because the first interval doesn't have a spacer, needs space
+.first {
+    padding-left: 10px;
 }
 
 .spacer {
@@ -75,4 +83,7 @@ li {
     padding-left: 30px;
 }
 
-
+#footer {
+   margin-left: -20px;
+   font-size: 13px;
+}
