@@ -1,8 +1,10 @@
 %h1
-  StackPro
+  stack<b>pro</b>
 
 %h2
-  When are the most questions answered on Stack Overflow?
+  When the most questions go unanswered on 
+  %a{href: "http://stackoverflow.com"}<
+    stackoverflow
 
 %ul
   %li
@@ -13,7 +15,27 @@
     Questions Unanswered:
   %li
     .box#subset
+%ul
+  %li
+    Select an 
+    %b
+      interval:
+  %li.interval.first#1
+    Every 1 hour for the past 24
+  %li.spacer
+    |
+  %li.interval#2
+    Every 2 hours for the past 48
+  %li.spacer
+    |
+  %li.interval#3
+    Every 3 hours for the past 48
+  %li.spacer
+    |
+  %li.interval#4
+    Every 4 hours for the past 48
 
+/ default size is required, will get resized by js
 %canvas{:id => "theChart", :width => 1200, :height => 600}
 
 %table#theTable
@@ -38,10 +60,12 @@
   %a{href:"http://www.davidbrownman.com"}
     Brownman
 
+%br
+Note: All times are US: Eastern
+
 :javascript
-  // takes three lists (dates, asked, answered) to build the graph
   function buildChart(dates, asked, unanswered){
-    console.log("in buildChart");
+    // console.log("in buildChart");
     // chart should scale to fit the whole graph
     var m = Math.max.apply(Math, asked)+50;
     var n = Math.min.apply(Math, unanswered)-50;
@@ -77,14 +101,16 @@
 
   };
 
-  // will build the chart
   function buildTable(interval, dates, asked, unanswered, percentage){
-    console.log("in buildTable");
+    // console.log("in buildTable");
+    if (interval === 1) {var hours = 23}
+    else {var hours = 47};
+
     var table = $("#theTable tbody");
     table.empty();
     for (var i=0; i<dates.length;i++) {
       var r = ["<tr>",
-        "<td>",i*interval,"</td>",
+        "<td>",hours - i*interval,"</td>",
         "<td>",dates[i],"</td>",
         "<td>",percentage[i].toFixed(2)+'%',"</td>",
         "<td>",asked[i],"</td>",
@@ -93,17 +119,13 @@
 
       table.append(r);
     };
-    // console.log("finished loop");
     $("#theTable").tablesorter();
 
   };
 
   // sets passes interval data and builds accordingly
   function build(interval){
-    console.log("in build");
     if (interval === 1) {
-      console.log("int is one");
-      //just slice and pass
       var slicedDates = dates.slice(dates.length - 24, dates.length);
       var slicedAsked = asked.slice(dates.length - 24, dates.length);
       var slicedUnanswered = unanswered.slice(dates.length - 24, dates.length);
@@ -111,7 +133,6 @@
     }
 
     else {
-      console.log("else");
       var tempTotal = 0;
       var slicedDates = [];
       var slicedAsked = [];
@@ -148,7 +169,7 @@
 
   };
 
-  // import data from rails
+  // set data from rails
   var dates = #{@dates};
 
   var asked = #{@asked};
@@ -157,63 +178,31 @@
 
   var percentage = #{@percentage};
 
-  // intervals: 
-  //    every 1 for 24 => 24
-  //    every 2 for 48 => 24
-  //    every 3 for 48 => 16
-  //    every 4 for 48 => 12
-
-
   var ctx = document.getElementById("theChart").getContext("2d");
+  // chart should nicely occupy the space above the fold
   ctx.canvas.width  = window.innerWidth-20;
+  ctx.canvas.height  = window.innerHeight-250;
 
+  // default interval 
   var interval = 1;
 
   build(interval);
-  // var data = {
-  //   labels : dates,
-  //   datasets : [
-  //     {
-  //       fillColor : "#1145ff",
-  //       strokeColor : "#000000",
-  //       pointColor : "#fff",
-  //       pointStrokeColor : "#000000",
-  //       data : asked
-  //     },
-  //     {
-  //       fillColor : "rgba(151,187,205,0.5)",
-  //       strokeColor : "rgba(151,187,205,0.8)",
-  //       pointColor : "#fff",
-  //       pointStrokeColor : "#000000",
-  //       data : unanswered
-  //     }
-  //   ]
-  // }
 
-  // buildChart(data); 
+  // click handlers for intervals
 
-  //all of the ruby stuff is included at load. might get too big, might not.
-  //the web is scary, can probably have huge data included? may hurt
-  //runtime. idk.
-
-  //table tbody.emtpy to empty rows, then can just loop again
-  // for (var i=0; i<dates.length;i++) {
-  //   var r = ["<tr>",
-  //     "<td>",i,"</td>",
-  //     "<td>",dates[i],"</td>",
-  //     "<td>",percentage[i].toFixed(2)+'%',"</td>",
-  //     "<td>",asked[i],"</td>",
-  //     "<td>",unanswered[i],"</td>",
-  //     "</tr>"].join(' ');
-
-  //   $("#theTable tbody").append(r);
-  // };
-
-  // $("#theTable").tablesorter();
-
-
-
-  $(".butt").click(function(){
-    // data.labels[0] = "#{@answer}";
-    buildChart(data);
+  $("#1").click(function(){
+    build(1);
   });
+
+  $("#2").click(function(){
+    build(2);
+  });
+
+  $("#3").click(function(){
+    build(3);
+  });
+
+  $("#4").click(function(){
+    build(4);
+  });
+
