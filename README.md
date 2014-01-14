@@ -1,6 +1,6 @@
 # StackPro
 
-Live at [stackpro.herokuapp](http://www.stackpro.herokuapp.com).
+Live at [stackpro.herokuapp](http://stackpro.herokuapp.com).
 
 ## The Assignment
 As dictated by the [Hackerati](http://www.thehackerati.com):
