@@ -16,3 +16,4 @@
 
 # Mac junk
 .DS_Store
+.sass-cache

@@ -58,16 +58,16 @@ li {
     -moz-transition: all 0.25s ease-in-out;
     -o-transition: all 0.25s ease-in-out;
     transition: all 0.25s ease-in-out;
-}
 
-.interval:hover {
-    color: blue;
-    cursor: default;
+    &:hover {
+        color: blue;
+        cursor: default;
+    }
 }
 
 // because the first interval doesn't have a spacer, needs space
 .first {
-    padding-left: 10px;
+    margin-left: 10px;
 }
 
 .spacer {
@@ -86,4 +86,8 @@ li {
 #footer {
    margin-left: -20px;
    font-size: 13px;
+}
+
+.active {
+    border-bottom: 2px solid black;
 }
