@@ -55,23 +55,6 @@
         Questions Answered
   %tbody
 
-%ul#footer
-  %li
-    A work in progress by David
-    %a{href:"http://www.davidbrownman.com"}
-      Brownman
-  %li.spacer
-    |
-  %li
-    Note: All times are US: Eastern
-  %li.spacer
-    |
-  %li
-    Learn more 
-    %a{href: '/about'}<
-      about 
-    this project
-
 :javascript
   function buildChart(dates, asked, unanswered){
     // console.log("in buildChart");
@@ -106,8 +89,7 @@
       scaleStartValue : n
     };
 
-    new Chart(ctx).Line(data,options);
-
+    new Chart(ctx).Line(data, options);
   };
 
   function buildTable(interval, dates, asked, unanswered, percentage){

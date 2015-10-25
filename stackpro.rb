@@ -1,7 +1,6 @@
 require 'sinatra'
 require 'mongo'
-require 'sass'
-require 'haml'
+require 'tilt/sass'
 require 'tilt/haml'
 require 'pp'
 require 'net/http'
@@ -23,7 +22,7 @@ get '/' do
   # shouldn't need to sort, data will always be in order it went in
   # just in case: .sort({'unix'=>1})
   @r = settings.db[:data_points].find({
-    unix: {'$gt' => t.to_i - (3600 * prev)}
+    # unix: {'$gt' => t.to_i - (3600 * prev)} # remove to find all
   }).to_a
 
   pp @r
@@ -33,11 +32,11 @@ get '/' do
   @unanswered = []
   @percentage = []
  
-  @response.each do |i|
-    @dates.push(i["timestamp"])
-    @asked.append(i["asked"])
-    @unanswered.append(i["unanswered"])
-    @percentage.append(i["percentage"])
+  @r.each do |i|
+    @dates << (i["timestamp"])
+    @asked << (i["asked"])
+    @unanswered << (i["unanswered"])
+    @percentage << (i["percentage"])
   end
 
   haml :index
