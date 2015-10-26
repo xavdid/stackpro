@@ -14,24 +14,23 @@ configure do
 end
 
 get '/' do
-  t = Time.now
   # how many hours max to go back
   prev = 48
 
   # shouldn't need to sort, data will always be in order it went in
   # just in case: .sort({'unix'=>1})
-  @r = settings.db[:data_points].find({
-    # unix: {'$gt' => t.to_i - (3600 * prev)} # remove to find all
+  resp = settings.db[:data_points].find({
+    unix: {'$gt' => Time.now.to_i - (3600 * prev)} # remove to find all
   }).to_a
 
-  pp @r
+  pp resp if settings.development?
 
   @dates = []
   @asked = []
   @unanswered = []
   @percentage = []
  
-  @r.each do |i|
+  resp.each do |i|
     @dates << (i["timestamp"])
     @asked << (i["asked"])
     @unanswered << (i["unanswered"])
