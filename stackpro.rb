@@ -8,6 +8,9 @@ configure do
   if settings.development?
     require 'dotenv'
     Dotenv.load
+  else
+    require 'rack-google-analytics'
+    use Rack::GoogleAnalytics, :tracker => 'UA-40842533-2'
   end
   Mongo::Logger.logger.level = ::Logger::FATAL
   set :db, Mongo::Client.new(ENV['MONGOLAB_URI'])

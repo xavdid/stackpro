@@ -8,6 +8,7 @@ gem 'sinatra', '~> 1.4'
 gem 'mongo', '~> 2.1'
 gem 'sass', '~> 3.4'
 gem 'thin', '~> 1.6'
+gem 'rack-google-analytics', '~> 1.2'
 
 group :development do 
   gem 'dotenv', '~> 2.0'
