@@ -3,7 +3,6 @@ require 'mongo'
 require 'tilt/sass'
 require 'tilt/haml'
 require 'pp'
-require 'net/http'
 
 configure do
   if settings.development?

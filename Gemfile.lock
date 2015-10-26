@@ -36,9 +36,9 @@ DEPENDENCIES
   haml (~> 4.0)
   httparty (~> 0.13)
   mongo (~> 2.1)
-  sass
+  sass (~> 3.4)
   sinatra (~> 1.4)
-  thin
+  thin (~> 1.6)
 
 BUNDLED WITH
    1.10.6
