@@ -1,0 +1,34 @@
+!!!
+%html
+  %head
+    %title
+      Stackpro
+
+    %link{rel: 'stylesheet', type: 'text/css', href: '/styles.css'}
+    %link{rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.23.5/css/theme.default.min.css'}
+
+  %body
+    #{yield}
+
+  %ul#footer
+    %li
+      A work in progress by 
+      %a{href:"http://www.davidbrownman.com"}
+        David Brownman
+    %li.spacer
+      |
+    %li
+      Note: All times are US: Eastern
+    %li.spacer
+      |
+    %li
+      Learn more 
+      %a{href: '/about'}<
+        about 
+      this project
+
+  -# javascript includes
+  %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'}
+  %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.23.5/js/jquery.tablesorter.min.js'}
+  %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'}
+  %script{src: '/js/the.js'}

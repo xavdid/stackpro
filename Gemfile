@@ -1,30 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.15'
-gem "mongo_mapper"
+gem 'haml', '~> 4.0'
+gem 'httparty', '~> 0.13'
+gem 'sinatra', '~> 1.4'
+gem 'mongo', '~> 2.1'
+gem 'sass', '~> 3.4'
+gem 'thin', '~> 1.6'
 
-group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-
-
-  gem 'uglifier', '>= 1.0.3'
+group :development do 
+  gem 'dotenv', '~> 2.0'
 end
-
-gem 'jquery-rails'
-
-gem 'haml'
-
-gem 'httparty'
-
-gem 'json'
-
-gem 'bson_ext'
-
-gem "mongoid"
-
-gem 'bson'
-
-gem 'rails_12factor'
-
-gem 'jquery-tablesorter'
