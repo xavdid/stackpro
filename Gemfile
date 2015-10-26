@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.2.3'
+
 gem 'haml', '~> 4.0'
 gem 'httparty', '~> 0.13'
 gem 'sinatra', '~> 1.4'
