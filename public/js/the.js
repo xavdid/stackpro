@@ -43,7 +43,7 @@ function buildTable(interval, dates, asked, unanswered, percentage){
   else {hours = 47;}
 
   $("#theTable tbody").empty();
-  for (var i=0; i<dates.length;i++) {
+  for (var i = 0; i < dates.length; i++) {
     var r = ["<tr>",
       "<td>",hours - i*interval,"</td>",
       "<td>",dates[i],"</td>",
@@ -73,13 +73,15 @@ function build(interval) {
   var slicedAsked = [];
   var slicedUnanswered = [];
   var slicedPercentage = [];
+
   if (interval === 1) {
+    // this makes the data small if there are less than 48 dates!
+    // only an issue if the database is emptied
     slicedDates = dates.slice(dates.length - 24, dates.length);
     slicedAsked = asked.slice(dates.length - 24, dates.length);
     slicedUnanswered = unanswered.slice(dates.length - 24, dates.length);
     slicedPercentage = percentage.slice(dates.length - 24, dates.length);
   }
-
   else {
     var tempTotal = 0;
   
@@ -117,7 +119,6 @@ function build(interval) {
 // MAIN
 
 // data set elsewhere
-
 var ctx = document.getElementById("theChart").getContext("2d");
 // chart should nicely occupy the space above the fold
 ctx.canvas.width = window.innerWidth-30;
