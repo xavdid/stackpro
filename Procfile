@@ -1,1 +1,1 @@
-web: bundle exec ruby refbook.rb -p $PORT
+web: bundle exec ruby stackpro.rb -p $PORT
