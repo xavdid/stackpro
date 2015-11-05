@@ -1,93 +1,115 @@
-* {
+
+$footer: 50px;
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     font-family: Sans-Serif;
-}
 
-a {
-    text-decoration: none;
-}
+    a {
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
 
-a:hover {
-    text-decoration: underline;
-}
+        &:visited {
+            color: blue;
+        }
+    }
 
-a:visited {
-    color: blue;
-}
-
-h1 {
-    font-size: 3em;
-    font-weight: normal;
-    padding-left: 30px;
-}
-
-h2 {
-    font-weight: normal;
-    padding-left: 40px;
-}
-
-p {
-    margin-left: 50px;
-    width: 70%;
-    font-weight: 200;
-}
-
-.box {
-    height: 13px; 
-    width: 13px;
-    background-color: #000;
-    clear: both;
-    outline: 1px solid black;
-    margin-right: 50px;
-}
-
-#total {
-    background-color: #1145ff;
-}
-
-#subset {
-    background-color: #97bbcd;
-}
-
-li {
-    display: inline-block;
-    font-weight: 200;
-}
-
-.interval {
-    -webkit-transition: all 0.25s ease-in-out;
-    -moz-transition: all 0.25s ease-in-out;
-    -o-transition: all 0.25s ease-in-out;
-    transition: all 0.25s ease-in-out;
-
-    &:hover {
-        color: blue;
+    .spacer {
+        padding-right: 20px;
+        padding-left: 20px;
         cursor: default;
+    }
+
+    li {
+        display: inline-block;
+        font-weight: 200;
     }
 }
 
-// because the first interval doesn't have a spacer, needs space
-.first {
-    margin-left: 10px;
+.container {
+    min-height: 100%;
+    position: relative;
 }
 
-.spacer {
-    padding-right: 20px;
-    padding-left: 20px;
-    cursor: default;
+.main {
+    padding: 10px;
+    padding-bottom: $footer;
+
+
+    h1 {
+        font-size: 3em;
+        font-weight: normal;
+        padding-left: 30px;
+    }
+
+    h2 {
+        font-weight: normal;
+        padding-left: 40px;
+    }
+
+    p {
+        margin-left: 50px;
+        width: 70%;
+        font-weight: 200;
+    }
+
+    .box {
+        height: 13px; 
+        width: 13px;
+        background-color: #000;
+        clear: both;
+        outline: 1px solid black;
+        margin-right: 50px;
+    }
+
+    #total {
+        background-color: #1145ff;
+    }
+
+    #subset {
+        background-color: #97bbcd;
+    }
+
+    .interval {
+        -webkit-transition: all 0.25s ease-in-out;
+        -moz-transition: all 0.25s ease-in-out;
+        -o-transition: all 0.25s ease-in-out;
+        transition: all 0.25s ease-in-out;
+
+        &:hover {
+            color: blue;
+            cursor: default;
+        }
+    }
+
+    // because the first interval doesn't have a spacer, needs space
+    .first {
+        margin-left: 10px;
+    }
+
+    #theTable{
+        margin-top: 40px;
+        margin-bottom: 40px;
+        width: 35%;
+        padding-left: 30px;
+    }
+
+    .active {
+        border-bottom: 2px solid black;
+    }
 }
 
-#theTable{
-    margin-top: 40px;
-    margin-bottom: 40px;
-    width: 35%;
-    padding-left: 30px;
-}
-
-#footer {
+.footer {
    margin-left: -20px;
    font-size: 13px;
+   position: absolute;
+   height: $footer;
+   width: 100%;
+   bottom: 0;
 }
 
-.active {
-    border-bottom: 2px solid black;
-}
+

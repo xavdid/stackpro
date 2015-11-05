@@ -8,32 +8,35 @@
     %link{rel: 'stylesheet', type: 'text/css', href: 'https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.23.5/css/theme.default.min.css'}
 
   %body
-    #{yield}
+    .container
+      .main
+        #{yield}
 
-  %ul#footer
-    %li
-      A work in progress by 
-      %a{href:"http://www.davidbrownman.com"}
-        David Brownman
-    %li.spacer
-      |
-    %li
-      Note: All times are US: Pacific
-    %li.spacer
-      |
-    %li
-      Learn more 
-      %a{href: '/about'}<
-        about 
-      this project
-    %li.spacer
-      |
-    %li
-      This site is in no way affiliated with Stackoverflow.com
+      .footer
+        %ul
+          %li
+            A work in progress by 
+            %a{href:"http://www.davidbrownman.com"}
+              David Brownman
+          %li.spacer
+            |
+          %li
+            Note: All times are US: Pacific
+          %li.spacer
+            |
+          %li
+            Learn more 
+            %a{href: '/about'}<
+              about 
+            this project
+          %li.spacer
+            |
+          %li
+            This site is in no way affiliated with Stackoverflow.com
 
 
-  -# javascript includes
-  %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'}
-  %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.23.5/js/jquery.tablesorter.min.js'}
-  %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'}
-  %script{src: '/js/the.js'}
+    -# javascript includes
+    %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js'}
+    %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.23.5/js/jquery.tablesorter.min.js'}
+    %script{src: 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'}
+    %script{src: '/js/the.js'}
