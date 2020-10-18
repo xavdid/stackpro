@@ -1,0 +1,70 @@
+{
+  "name": "backend",
+  "version": "0.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint src --ext .ts,.tsx",
+    "test": "jest",
+    "validate": "yarn test && yarn lint",
+    "release": "npx np",
+    "prestart": "yarn build",
+    "start": "node lib/index.js",
+    "dev": "nodemon"
+  },
+  "keywords": [],
+  "files": [
+    "lib/*.js",
+    "lib/index.d.ts"
+  ],
+  "author": {
+    "name": "David Brownman",
+    "email": "beamneocube@gmail.com",
+    "url": "https://davidbrownman.com"
+  },
+  "license": "ISC",
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.+(ts|tsx|js)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  },
+  "dependencies": {
+    "express": "4.17.1",
+    "helmet": "4.1.1"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.8",
+    "@types/helmet": "0.0.48",
+    "@types/jest": "26.0.14",
+    "@types/node": "14.11.10",
+    "@typescript-eslint/eslint-plugin": "4.4.1",
+    "@typescript-eslint/parser": "4.4.1",
+    "eslint": "7.11.0",
+    "eslint-config-prettier": "6.13.0",
+    "eslint-config-standard-with-typescript": "19.0.1",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jest": "24.1.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-standard": "4.0.1",
+    "jest": "26.5.3",
+    "nodemon": "^2.0.5",
+    "prettier": "2.1.2",
+    "ts-jest": "26.4.1",
+    "ts-node": "^9.0.0",
+    "typescript": "4.0.3"
+  }
+}
