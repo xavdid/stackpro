@@ -9,10 +9,13 @@
     "lint": "eslint src",
     "test": "jest",
     "validate": "yarn test && yarn lint",
-    "release": "npx np",
     "prestart": "yarn build",
     "start": "node lib/index.js",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ./src/ormconfig.ts",
+    "makemigration": "ts-node ./node_modules/typeorm/cli migration:generate -n Recording -f ./src/ormconfig.ts",
+    "migrate": "ts-node ./node_modules/typeorm/cli migration:run -f ./src/ormconfig.ts",
+    "migrations": "ts-node ./node_modules/typeorm/cli migration:show -f ./src/ormconfig.ts"
   },
   "keywords": [],
   "files": [

@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "target": "es2018",
     "lib": ["es2018"],
-    // "strict": true,
+    "strict": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
     // "jsx": "react"

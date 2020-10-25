@@ -1,7 +1,7 @@
 import express from 'express'
 import path from 'path'
 import { createConnection } from 'typeorm'
-import { typeOrmConfig } from './config'
+import typeOrmConfig from './ormconfig'
 import { Recording } from './entity/recording'
 
 const port = process.env.PORT ?? 1234
