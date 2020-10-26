@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Live at [stackpro.herokuapp](http://stackpro.herokuapp.com).",
   "scripts": {
-    "heroku-prebuild": "yarn --cwd backend && yarn --cwd frontend",
+    "heroku-prebuild": "yarn --cwd backend --production=false && yarn --cwd frontend",
     "heroku-postbuild": "yarn --cwd backend build && yarn --cwd frontend build",
     "start": "yarn --cwd backend prodstart"
   },
