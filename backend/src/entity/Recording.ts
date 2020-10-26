@@ -16,6 +16,6 @@ export class Recording extends BaseEntity {
   @Column('integer')
   unixTs!: number
 
-  @Column('text')
-  formattedDate!: string
+  @Column('timestamp')
+  collectedAt!: string
 }

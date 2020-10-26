@@ -3,6 +3,7 @@ import path from 'path'
 import { createConnection } from 'typeorm'
 import typeOrmConfig from './ormconfig'
 import { Recording } from './entity/recording'
+import helmet = require('helmet')
 
 const port = process.env.PORT ?? 1234
 const frontendPath = path.join(__dirname, '..', '..', 'frontend', 'build')
@@ -11,6 +12,7 @@ const frontendPath = path.join(__dirname, '..', '..', 'frontend', 'build')
 createConnection({ ...typeOrmConfig, entities: [Recording] })
   .then(() => {
     const app = express()
+    app.use(helmet())
 
     app.use(express.static(frontendPath))
     app.get('/', function (req, res) {
@@ -25,22 +27,9 @@ createConnection({ ...typeOrmConfig, entities: [Recording] })
         return next(e)
       }
     })
-
-    app.get('/api/data', async (req, res, next) => {
-      try {
-        const record = new Recording()
-        record.answered = 123
-        record.asked = 234
-        record.unixTs = Math.floor(new Date().getTime() / 1000)
-        const now = new Date()
-        record.formattedDate = `${now.getHours()}:${now.getMinutes()} ${
-          now.getMonth() + 1
-        }/${now.getDate()}`
-        await record.save()
-        res.json({ ok: true })
-      } catch (e) {
-        return next(e)
-      }
+    // might be too broad
+    app.get('*', (req, res) => {
+      res.status(404).json({ message: 'not found' })
     })
 
     app.listen(port, () => {

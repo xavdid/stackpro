@@ -10,6 +10,10 @@ const typeOrmConfig: PostgresConnectionOptions = {
   port: 5432,
   entities: [join(__dirname, '/entity/*{.ts,.js}')],
   migrations: [join(__dirname, '/migrations/*{.ts,.js}')],
+  cli: {
+    // tells the CLI where to write migration files
+    migrationsDir: 'src/migrations',
+  },
 }
 
 export = typeOrmConfig
