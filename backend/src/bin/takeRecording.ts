@@ -1,7 +1,7 @@
 import { createConnection } from 'typeorm'
 
 import typeOrmConfig from '../ormconfig'
-import { Recording } from '../entity/recording'
+import { Recording } from '../entity/Recording'
 import got from 'got'
 
 const stackoverflowUrl = (unanswered = false): string =>
