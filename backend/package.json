@@ -12,6 +12,7 @@
     "validate": "yarn test && yarn lint",
     "prestart": "yarn build",
     "start": "node lib/index.js",
+    "prodstart": "node lib/index.js",
     "dev": "nodemon",
     "typeorm:cli": "ts-node ./node_modules/typeorm/cli -f ./src/ormconfig.ts",
     "makemigration": "ts-node ./node_modules/typeorm/cli migration:generate -n Recording -f ./src/ormconfig.ts",

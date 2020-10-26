@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "version": "0.0.0",
+  "description": "Live at [stackpro.herokuapp](http://stackpro.herokuapp.com).",
+  "scripts": {
+    "heroku-postbuild": "yarn --cwd backend build && yarn --cwd frontend build",
+    "start": "yarn --cwd backend prodstart"
+  },
+  "engines": {
+    "node": "12.x",
+    "yarn": "1.x"
+  },
+  "author": "David Brownman <beamneocube@gmail.com> (https://xavd.id)",
+  "license": "ISC"
+}

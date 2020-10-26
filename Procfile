@@ -1,1 +1,1 @@
-web: bundle exec ruby stackpro.rb -p $PORT
+web: yarn start
