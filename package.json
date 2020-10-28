@@ -4,7 +4,7 @@
   "description": "Live at [stackpro.herokuapp](http://stackpro.herokuapp.com).",
   "scripts": {
     "heroku-prebuild": "yarn --cwd backend --production=false && yarn --cwd frontend",
-    "heroku-postbuild": "cd backend && yarn build && cd ../frontend && yarn --cwd frontend build",
+    "heroku-postbuild": "yarn --cwd backend build && yarn --cwd frontend build",
     "start": "yarn --cwd backend prodstart"
   },
   "engines": {
@@ -12,5 +12,9 @@
     "yarn": "1.x"
   },
   "author": "David Brownman <beamneocube@gmail.com> (https://xavd.id)",
-  "license": "ISC"
+  "license": "ISC",
+  "cacheDirectories": [
+    "frontend/node_modules",
+    "backend/node_modules"
+  ]
 }
