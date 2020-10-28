@@ -21,7 +21,11 @@ createConnection({ ...typeOrmConfig, entities: [Recording] })
 
     app.get('/api/records', async (req, res, next) => {
       try {
-        const records = await Recording.find()
+        const records = await Recording.find({
+          order: { id: 'DESC' },
+          take: 24,
+        })
+        records.reverse()
         res.json(records)
       } catch (e) {
         return next(e)

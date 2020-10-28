@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
+
+import StackedBar from "./StackedBar";
+import { Recording } from "./interfaces";
+
 import "./App.css";
 
 const App = () => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<Recording[] | null>(null);
   useEffect(() => {
     const loadData = async () => {
       const x = await fetch("/api/records");
@@ -16,18 +20,10 @@ const App = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Currently Under Construction!</h1>
-      Data is:{" "}
-      <pre
-        style={{
-          backgroundColor: "#efefef",
-          padding: "10px",
-          borderRadius: "5px",
-          maxWidth: "40%",
-        }}
-      >
-        {JSON.stringify(data, null, 2)}
-      </pre>
+      <h1 style={{ fontWeight: 300 }}>
+        stack<strong>pro</strong>
+      </h1>
+      {data !== null ? <StackedBar data={data} /> : "Loading..."}
     </div>
   );
 };

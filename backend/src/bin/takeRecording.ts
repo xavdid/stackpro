@@ -25,6 +25,7 @@ const main = async (): Promise<void> => {
       fromdate,
       todate,
       site: 'stackoverflow',
+      // only the `total` key
       filter: '!3ugOCpzcfBz9QEr8Ve.I',
     },
   }

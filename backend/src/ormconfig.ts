@@ -16,4 +16,5 @@ const typeOrmConfig: PostgresConnectionOptions = {
   },
 }
 
+// needs to be this sort of export for compatibility reasons
 export = typeOrmConfig

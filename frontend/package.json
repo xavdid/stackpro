@@ -11,17 +11,20 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "chart.js": "^2.9.4",
     "react": "^16.14.0",
+    "react-chartjs-2": "^2.10.0",
     "react-dom": "^16.14.0",
     "react-scripts": "3.4.3",
     "typescript": "^4.0.3"
   },
   "scripts": {
-    "start": "BROWSER=none react-scripts start",
-    "build": "react-scripts build",
+    "dev": "BROWSER=none react-scripts start",
+    "clean": "rm -rf build",
+    "build": "INLINE_RUNTIME_CHUNK=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src --ext .ts,.js"
+    "lint": "eslint src --ext .ts,.js,.tsx,.jsx"
   },
   "eslintConfig": {
     "extends": "react-app"
