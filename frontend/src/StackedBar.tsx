@@ -42,12 +42,12 @@ const structureDataForChart = (
     labels: data.map(d => formatDate(d.collectedAt)),
     datasets: [
       {
-        label: "Unanswered",
+        label: "# Unanswered",
         data: data.map(d => d.asked - d.answered),
         backgroundColor: color(0, 39, 76),
       },
       {
-        label: "Answered",
+        label: "# Answered",
         data: data.map(d => d.answered),
         backgroundColor: color(0, 178, 169),
       },
@@ -59,6 +59,10 @@ const options = {
   scales: {
     yAxes: [
       {
+        scaleLabel: {
+          display: true,
+          labelString: "# Questions",
+        },
         stacked: true,
         ticks: {
           beginAtZero: true,
@@ -67,6 +71,14 @@ const options = {
     ],
     xAxes: [
       {
+        ticks: {
+          autoSkip: true,
+          maxTicksLimit: 24,
+        },
+        scaleLabel: {
+          display: true,
+          labelString: "Recording Timestamp",
+        },
         stacked: true,
       },
     ],

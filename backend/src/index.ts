@@ -23,7 +23,7 @@ createConnection({ ...typeOrmConfig, entities: [Recording] })
       try {
         const records = await Recording.find({
           order: { id: 'DESC' },
-          take: 24,
+          take: 48,
         })
         records.reverse()
         res.json(records)
