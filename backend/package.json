@@ -43,7 +43,7 @@
     "singleQuote": true
   },
   "dependencies": {
-    "express": "4.17.1",
+    "express": "4.17.3",
     "got": "^11.8.0",
     "helmet": "4.1.1",
     "pg": "^8.4.1",
